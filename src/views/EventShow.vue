@@ -6,8 +6,12 @@
 
 <script>
 export default {
+  components: {},
+  data() {
+    return {};
+  },
   props: ["id"]
 };
 </script>
 
-<style></style>
+<style scoped></style>
