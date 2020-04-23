@@ -1,4 +1,12 @@
 # real-world-vue
+Install json-server with npm with.
+```
+sudo npm install -g json-server
+```
+And then we can serve our json example file withn:
+```
+json-server db.json
+```
 
 ## Project setup
 ```
