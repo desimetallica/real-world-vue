@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import EventService from "@/services/EventService.js";
 
 Vue.use(Vuex);
 
@@ -15,12 +16,7 @@ export default new Vuex.Store({
       "food",
       "community"
     ],
-    events: [
-      { id: 1, text: "...", done: true },
-      { id: 2, text: "...", done: false },
-      { id: 3, text: "...", done: true },
-      { id: 4, text: "...", done: false }
-    ],
+    events: [],
     todos: [
       { id: 1, text: "...", done: true },
       { id: 2, text: "...", done: false },
@@ -49,7 +45,29 @@ export default new Vuex.Store({
       return state.todos.length;
     }
   },
-  mutations: {},
-  actions: {},
+  /*We can use Mutations to update, or mutate, our State
+    Vuex Mutations are synchronous.
+    It’s important to understand that the Mutations within an Action may or may not be committed,
+    depending on how the surrounding logic and circumstances pan out.
+ */
+  mutations: {
+    ADD_EVENT(state, event) {
+      state.events.push(event);
+    }
+  },
+  /*We can use Actions to wrap some business logic around a Mutation, or Mutations.
+    Actions can be asynchronous.
+    Actions are more like expressing an intent or desire for something to happen,
+    for some change to be made to the state, depending upon some surrounding circumstances.
+  */
+  actions: {
+    createEvent({ commit }, event) {
+      //I push the event in my db and..
+      return EventService.postEvent(event).then(() => {
+        //...if the request goes into safe state i can update value in my application
+        commit("ADD_EVENT", event);
+      });
+    }
+  },
   modules: {}
 });
