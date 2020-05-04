@@ -17,6 +17,7 @@ export default new Vuex.Store({
       "community"
     ],
     events: [],
+    eventsTotal: 0,
     todos: [
       { id: 1, text: "...", done: true },
       { id: 2, text: "...", done: false },
@@ -53,6 +54,12 @@ export default new Vuex.Store({
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event);
+    },
+    SET_EVENTS(state, events) {
+      state.events = events;
+    },
+    SET_EVENTSTOTAL(state, total) {
+      state.eventsTotal = total;
     }
   },
   /*We can use Actions to wrap some business logic around a Mutation, or Mutations.
@@ -67,6 +74,26 @@ export default new Vuex.Store({
         //...if the request goes into safe state i can update value in my application
         commit("ADD_EVENT", event);
       });
+    },
+    fetchEvents({ commit }) {
+      EventService.getEvents()
+        .then(response => {
+          commit("SET_EVENTS", response.data);
+          commit("SET_EVENTSTOTAL", response.headers["x-total-count"]);
+        })
+        .catch(error => {
+          console.log("Error:", error.response);
+        });
+    },
+    fetchEventsPages({ commit }, { perPage, page }) {
+      EventService.getEventsPages(perPage, page)
+        .then(response => {
+          commit("SET_EVENTS", response.data);
+          commit("SET_EVENTSTOTAL", response.headers["x-total-count"]);
+        })
+        .catch(error => {
+          console.log("Error:", error.response);
+        });
     }
   },
   modules: {}
