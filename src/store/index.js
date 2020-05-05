@@ -23,7 +23,8 @@ export default new Vuex.Store({
       { id: 2, text: "...", done: false },
       { id: 3, text: "...", done: true },
       { id: 4, text: "...", done: false }
-    ]
+    ],
+    event: {}
   },
   getters: {
     // arrow function simplify pass state => return length
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     SET_EVENTSTOTAL(state, total) {
       state.eventsTotal = total;
+    },
+    SET_EVENT(state, event) {
+      state.event = event;
     }
   },
   /*We can use Actions to wrap some business logic around a Mutation, or Mutations.
@@ -94,6 +98,23 @@ export default new Vuex.Store({
         .catch(error => {
           console.log("Error:", error.response);
         });
+    },
+    /*In order to be more performant in the API calls i can inject getters and use
+      the getEventById and check if in the eventList I already have the event that i need.
+    */
+    fetchEvent({ commit, getters }, id) {
+      var event = getters.getEventById(id);
+      if (event) {
+        commit("SET_EVENT", event);
+      } else {
+        EventService.getEvent(id)
+          .then(response => {
+            commit("SET_EVENT", response.data);
+          })
+          .catch(error => {
+            console.log("Error during fetchEvent call", error.response);
+          });
+      }
     }
   },
   modules: {}
