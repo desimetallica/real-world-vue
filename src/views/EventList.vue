@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1>Event List</h1>
-    <EventCard v-for="event in events" :key="event.id" :event="event">
+    <!--  {{ user.user.name }} the first 'user' is the module name and the second 'user' is the state inside the module    -->
+    <h1>Event List for {{ user.user.name }}</h1>
+    <EventCard v-for="event in event.events" :key="event.id" :event="event">
     </EventCard>
     <template v-if="page != 1">
       <router-link
@@ -11,7 +12,7 @@
         Prev Page</router-link
       >
     </template>
-    <template v-if="this.eventsTotal > page * 3">
+    <template v-if="event.eventsTotal > page * 3">
       |
       <router-link
         :to="{ name: 'EventList', query: { page: page + 1 } }"
@@ -33,7 +34,8 @@ export default {
     EventCard
   },
   created() {
-    this.$store.dispatch("fetchEventsPages", {
+    //This dispatch use event/fetchEventsPages because it use namespaced modules
+    this.$store.dispatch("event/fetchEventsPages", {
       perPage: 3,
       page: this.page
     });
@@ -43,8 +45,14 @@ export default {
       // What page we're currently on (query in which router page I'm in or assuming 1)
       return parseInt(this.$route.query.page) || 1;
     },
-    ...mapState(["events"]),
-    ...mapState(["eventsTotal"])
+    /*since we are using modules we have to change this to...
+      ...mapState(["events", "eventsTotal", "user"])
+      ..This:
+      ...mapState(["event", "user"])
+      because event is now our module. In the calls inside our eventList we must use
+      event.eventsTotal to access the total event value inside event module
+    */
+    ...mapState(["event", "user"])
   }
 };
 </script>

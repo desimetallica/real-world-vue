@@ -49,7 +49,7 @@
 </template>
 
 <script>
-//import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 import datepicker from "vuejs-datepicker";
 
 export default {
@@ -70,7 +70,7 @@ export default {
   methods: {
     createEvent() {
       this.$store
-        .dispatch("createEvent", this.event)
+        .dispatch("event/createEvent", this.event)
         .then(() => {
           // we will only reset our event data if the POST request was a success.
           this.event = this.createFreshEventObject();
@@ -100,15 +100,22 @@ export default {
       };
     }
   },
-  computed: {
-    getEvent() {
-      return this.$store.getters.getEventById(2);
-    },
-    getLength() {
-      return this.$store.getters.getCatLength;
-    }
-    //...mapState(["user", "categories"])
+  /*With namespaced modules we don’t access any of our
+  getters from our current code to event module.
+  In order to use again this getters we have to import
+  mapGetters and use different notation. More info on:
+  https://forum.vuejs.org/t/pass-parameters-to-getters-with-namespace-set-to-true/27616/7
+  From this:
+  getEvent() {
+    return this.$store.getters.getEventById(2);
+  },
+  getLength() {
+    return this.$store.getters.getCatLength;
   }
+  To this:
+  const anEvent = this.getEventById(this.id);
+  */
+  computed: mapGetters("event", ["getEventById", "getCatLength"])
 };
 </script>
 
