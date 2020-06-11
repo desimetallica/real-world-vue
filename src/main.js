@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
 //import BaseIcon from "@/components/BaseIcon.vue";
 /*
 upperFirst converts the first character of a string to upper case.
@@ -9,6 +10,9 @@ camelCase converts a string to camel case (camelCase isWritten likeThis)
 */
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
+
+import "nprogress/nprogress.css";
+
 Vue.config.productionTip = false;
 
 /*

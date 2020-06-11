@@ -30,21 +30,25 @@
 
 <script>
 //import EventService from "@/services/EventService.js";
-import { mapState } from "vuex";
+//import { mapState } from "vuex"; refactoring for NProgress loadbar
 
 export default {
   components: {},
-  created() {
-    this.$store.dispatch("event/fetchEvent", this.id);
-  },
+  /*
   computed: mapState({
-    /*I can map the event.event to even in this component
-      this to avoid to change all the locally event.prop in this component to
-      event.event.prop.
-    */
+    // I can map the event.event to even in this component
+    //   this to avoid to change all the locally event.prop in this component to
+    //   event.event.prop.
+    
     event: state => state.event.event
   }),
-  props: ["id"]
+  */
+  props: {
+    event: {
+      type: Object,
+      required: true
+    }
+  }
 };
 </script>
 

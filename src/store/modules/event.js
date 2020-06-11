@@ -141,10 +141,13 @@ export const actions = {
     var event = getters.getEventById(id);
     if (event) {
       commit("SET_EVENT", event);
+      return event; //return for router beforeEnter function
     } else {
-      EventService.getEvent(id)
+      // the return is for router and beforeEnter() function
+      return EventService.getEvent(id)
         .then(response => {
           commit("SET_EVENT", response.data);
+          return response.data; //return for router beforeEnter function
         })
         .catch(error => {
           /* Instead to use console log we can use notification module just created.

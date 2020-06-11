@@ -1,10 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store";
 //import Home from "../views/Home.vue";
 import EventShow from "../views/EventShow.vue";
 import EventCreate from "../views/EventCreate.vue";
 import EventList from "../views/EventList.vue";
 import User from "../views/User.vue";
+import NProgress from "nprogress";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -22,7 +25,22 @@ const routes = [
     path: "/event/:id",
     name: "EventShow",
     component: EventShow,
-    props: true
+    props: true,
+    beforeEnter(routeTo, routeFrom, next) {
+      /*before this route is loaded, in order for then() to get called when 
+      the API is returned we need to make sure this action returns a promise
+      */
+      store.dispatch("event/fetchEvent", routeTo.params.id).then(event => {
+        /* we now take the event which is returned 
+           and set it to the value of routeTo.params.event 
+           Then after next() is called. Since props: true is 
+           set for the component, params.event gets sent in as the event prop.
+           To make sure the value gets sent in the callback, 
+           we’ll need to add two returns to our event Module */
+        routeTo.params.event = event;
+        next();
+      });
+    }
   },
   {
     path: "/event/create",
@@ -55,6 +73,15 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((routeTo, routeFrom, next) => {
+  NProgress.start();
+  next();
+});
+
+router.afterEach(() => {
+  NProgress.done();
 });
 
 export default router;
