@@ -62,37 +62,82 @@ export const mutations = {
   for some change to be made to the state, depending upon some surrounding circumstances.
 */
 export const actions = {
-  createEvent({ commit }, event) {
+  createEvent({ commit, dispatch }, event) {
     //I push the event in my db and..
-    return EventService.postEvent(event).then(() => {
-      //...if the request goes into safe state i can update value in my application
-      commit("ADD_EVENT", event);
-    });
+    return EventService.postEvent(event)
+      .then(() => {
+        //...if the request goes into safe state i can update value in my application
+        commit("ADD_EVENT", event);
+        const notification = {
+          type: "success",
+          message: "Your event has been created!"
+        };
+        /* root: true tells dispatch to look for a notification/add action at the root of our store, 
+         instead of just looking for it inside the module we’re currently in. */
+        dispatch("notification/add", notification, { root: true });
+      })
+      .catch(error => {
+        /* Instead to use console log we can use notification module just created.
+         console.log("Error:", error.response); 
+         We can dispatch an add notification ACTION. */
+        const notification = {
+          type: "error",
+          message:
+            "There was an error during creating your event " + error.message
+        };
+        /* root: true tells dispatch to look for a notification/add action at the root of our store, 
+         instead of just looking for it inside the module we’re currently in. */
+        dispatch("notification/add", notification, { root: true });
+        //need to throw the error so that we can propagate it up to our component
+        throw error;
+      });
   },
-  fetchEvents({ commit }) {
+  fetchEvents({ commit, dispatch }) {
     EventService.getEvents()
       .then(response => {
         commit("SET_EVENTS", response.data);
         commit("SET_EVENTSTOTAL", response.headers["x-total-count"]);
       })
       .catch(error => {
-        console.log("Error:", error.response);
+        /* Instead to use console log we can use notification module just created.
+        console.log("Error:", error.response); 
+        We can dispatch an add notification ACTION.
+        */
+        const notification = {
+          type: "error",
+          message:
+            "There was an error during fetching events list " + error.message
+        };
+        /* root: true tells dispatch to look for a notification/add action at the root of our store, 
+           instead of just looking for it inside the module we’re currently in. */
+        dispatch("notification/add", notification, { root: true });
       });
   },
-  fetchEventsPages({ commit }, { perPage, page }) {
+  fetchEventsPages({ commit, dispatch }, { perPage, page }) {
     EventService.getEventsPages(perPage, page)
       .then(response => {
         commit("SET_EVENTS", response.data);
         commit("SET_EVENTSTOTAL", response.headers["x-total-count"]);
       })
       .catch(error => {
-        console.log("Error:", error.response);
+        /* Instead to use console log we can use notification module just created.
+        console.log("Error:", error.response); 
+        We can dispatch an add notification ACTION.
+        */
+        const notification = {
+          type: "error",
+          message:
+            "There was an error during fetching events list " + error.message
+        };
+        /* root: true tells dispatch to look for a notification/add action at the root of our store, 
+         instead of just looking for it inside the module we’re currently in. */
+        dispatch("notification/add", notification, { root: true });
       });
   },
   /*In order to be more performant in the API calls i can inject getters and use
     the getEventById and check if in the eventList I already have the event that i need.
   */
-  fetchEvent({ commit, getters }, id) {
+  fetchEvent({ commit, getters, dispatch }, id) {
     var event = getters.getEventById(id);
     if (event) {
       commit("SET_EVENT", event);
@@ -102,7 +147,16 @@ export const actions = {
           commit("SET_EVENT", response.data);
         })
         .catch(error => {
-          console.log("Error during fetchEvent call", error.response);
+          /* Instead to use console log we can use notification module just created.
+             console.log("Error:", error.response); 
+             We can dispatch an add notification ACTION. */
+          const notification = {
+            type: "error",
+            message: "There was an error during fetching event " + error.message
+          };
+          /* root: true tells dispatch to look for a notification/add action at the root of our store, 
+             instead of just looking for it inside the module we’re currently in. */
+          dispatch("notification/add", notification, { root: true });
         });
     }
   }

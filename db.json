@@ -101,6 +101,182 @@
     },
     {
       "id": 8419989
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 354048,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "Test",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 433963,
+      "category": "nature",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "MYevent",
+      "description": "test",
+      "location": "MyHOme",
+      "date": "2020-06-12T09:57:00.000Z",
+      "time": "12:00",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 258250,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "Test",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 647025,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 799970,
+      "category": "sustainability",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "MyEventRonco",
+      "description": "roncotown",
+      "location": "Ronco S",
+      "date": "2020-06-03T11:28:00.000Z",
+      "time": "17:00",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 83183,
+      "category": "housing",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "adasddas",
+      "description": "dsa",
+      "location": "eee",
+      "date": "2020-06-10T11:32:00.000Z",
+      "time": "19:00",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 891867,
+      "category": "housing",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "ultimo",
+      "description": "ultimo",
+      "location": "ultimo",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 898433,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "ultimo",
+      "description": "ultm",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }

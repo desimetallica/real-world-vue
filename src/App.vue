@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavBar />
+    <NotificationContainer />
     <!-- :key="$route.fullPath" tell our router to reload components when the full URL changes, including the query parameters. -->
     <router-view :key="$route.fullPath" />
   </div>
@@ -8,10 +9,12 @@
 
 <script>
 import NavBar from "@/components/NavBar.vue";
+import NotificationContainer from "@/components/NotificationContainer.vue";
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    NotificationContainer
   }
 };
 </script>
@@ -100,6 +103,9 @@ small {
 }
 .-text-error {
   color: tomato;
+}
+.-text-success {
+  color: green;
 }
 .-text-gray {
   color: rgba(0, 0, 0, 0.5);

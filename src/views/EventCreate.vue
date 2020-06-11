@@ -69,19 +69,14 @@ export default {
   },
   methods: {
     createEvent() {
-      this.$store
-        .dispatch("event/createEvent", this.event)
-        .then(() => {
-          // we will only reset our event data if the POST request was a success.
-          this.event = this.createFreshEventObject();
-          this.$router.push({
-            name: "EventShow",
-            params: { id: this.event.id }
-          });
-        })
-        .catch(() => {
-          console.log("Problem with creation of event");
+      this.$store.dispatch("event/createEvent", this.event).then(() => {
+        // we will only reset our event data if the POST request was a success.
+        this.$router.push({
+          name: "EventShow",
+          params: { id: this.event.id }
         });
+        this.event = this.createFreshEventObject();
+      });
     },
     createFreshEventObject() {
       const user = this.$store.state.user;
