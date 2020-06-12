@@ -11,7 +11,8 @@ export const namespaced = true;
 export const state = {
   events: [],
   eventsTotal: 0,
-  event: {}
+  event: {},
+  perPage: 3
 };
 
 export const getters = {
@@ -113,8 +114,9 @@ export const actions = {
         dispatch("notification/add", notification, { root: true });
       });
   },
-  fetchEventsPages({ commit, dispatch }, { perPage, page }) {
-    EventService.getEventsPages(perPage, page)
+  fetchEventsPages({ commit, dispatch, state }, { page }) {
+    // Added return in order to return promise so we can only render our EventList component when the API call is finished.
+    return EventService.getEventsPages(state.perPage, page)
       .then(response => {
         commit("SET_EVENTS", response.data);
         commit("SET_EVENTSTOTAL", response.headers["x-total-count"]);

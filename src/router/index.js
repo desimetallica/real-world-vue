@@ -9,6 +9,9 @@ import User from "../views/User.vue";
 import NProgress from "nprogress";
 
 Vue.use(VueRouter);
+/*Info related to Router Guards:
+https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
+ */
 
 const routes = [
   // {
@@ -19,13 +22,15 @@ const routes = [
   {
     path: "/",
     name: "EventList",
-    component: EventList
+    component: EventList,
+    props: true
   },
   {
     path: "/event/:id",
     name: "EventShow",
     component: EventShow,
     props: true,
+    //Per-Route Guard
     beforeEnter(routeTo, routeFrom, next) {
       /*before this route is loaded, in order for then() to get called when 
       the API is returned we need to make sure this action returns a promise
@@ -74,7 +79,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-
+/*Global Resolve Guards
+routeTo This refers to the route that is about to be navigated to.
+routeFrom This refers to the route that is about to be navigated away from.
+next This is a function that must be called in each of them to resolve the hook, and continue navigation.*/
 router.beforeEach((routeTo, routeFrom, next) => {
   NProgress.start();
   next();
