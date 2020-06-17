@@ -1,12 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store";
+import NProgress from "nprogress";
+
 //import Home from "../views/Home.vue";
 import EventShow from "../views/EventShow.vue";
 import EventCreate from "../views/EventCreate.vue";
 import EventList from "../views/EventList.vue";
 import User from "../views/User.vue";
-import NProgress from "nprogress";
+import NotFound from "../views/NotFound.vue";
+import NetworkIssue from "../views/NetworkIssue.vue";
 
 Vue.use(VueRouter);
 /*Info related to Router Guards:
@@ -35,16 +38,28 @@ const routes = [
       /*before this route is loaded, in order for then() to get called when 
       the API is returned we need to make sure this action returns a promise
       */
-      store.dispatch("event/fetchEvent", routeTo.params.id).then(event => {
-        /* we now take the event which is returned 
+      store
+        .dispatch("event/fetchEvent", routeTo.params.id)
+        .then(event => {
+          /* we now take the event which is returned 
            and set it to the value of routeTo.params.event 
            Then after next() is called. Since props: true is 
            set for the component, params.event gets sent in as the event prop.
            To make sure the value gets sent in the callback, 
            we’ll need to add two returns to our event Module */
-        routeTo.params.event = event;
-        next();
-      });
+          routeTo.params.event = event;
+          next();
+        })
+        .catch(error => {
+          if (error.response && error.response.status == 404) {
+            next({
+              name: "404",
+              params: { resource: "event" }
+            });
+          } else {
+            next({ name: "NetworkIssue" });
+          }
+        });
     }
   },
   {
@@ -71,6 +86,22 @@ const routes = [
     // we want to make rediraction from /about to /about-us with:
     path: "/about",
     redirect: { name: "about-us" }
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: NotFound,
+    props: true
+  },
+  {
+    path: "/networkIssue",
+    name: "NetworkIssue",
+    component: NetworkIssue
+  },
+  {
+    // None of above will be routed here
+    path: "*",
+    redirect: { name: "404", params: { resource: "page" } }
   }
 ];
 

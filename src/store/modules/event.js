@@ -139,30 +139,29 @@ export const actions = {
   /*In order to be more performant in the API calls i can inject getters and use
     the getEventById and check if in the eventList I already have the event that i need.
   */
-  fetchEvent({ commit, getters, dispatch }, id) {
+  fetchEvent({ commit, getters }, id) {
     var event = getters.getEventById(id);
     if (event) {
       commit("SET_EVENT", event);
       return event; //return for router beforeEnter function
     } else {
       // the return is for router and beforeEnter() function
-      return EventService.getEvent(id)
-        .then(response => {
-          commit("SET_EVENT", response.data);
-          return response.data; //return for router beforeEnter function
-        })
-        .catch(error => {
+      return EventService.getEvent(id).then(response => {
+        commit("SET_EVENT", response.data);
+        return response.data; //return for router beforeEnter function
+      });
+      /*.catch(error => {
           /* Instead to use console log we can use notification module just created.
              console.log("Error:", error.response); 
-             We can dispatch an add notification ACTION. */
+             We can dispatch an add notification ACTION. 
           const notification = {
             type: "error",
             message: "There was an error during fetching event " + error.message
           };
           /* root: true tells dispatch to look for a notification/add action at the root of our store, 
-             instead of just looking for it inside the module we’re currently in. */
+             instead of just looking for it inside the module we’re currently in. 
           dispatch("notification/add", notification, { root: true });
-        });
+        }); */
     }
   }
 };
