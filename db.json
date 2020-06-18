@@ -453,6 +453,28 @@
       "date": "",
       "time": "",
       "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 770696,
+      "category": "sustainability",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "PuppyPartyNiella",
+      "description": "ci scassiamo",
+      "location": "Niella Tanaro",
+      "date": "2020-06-02T08:41:00.000Z",
+      "time": "17:00",
+      "attendees": []
     }
   ]
 }
