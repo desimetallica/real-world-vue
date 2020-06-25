@@ -145,6 +145,94 @@
       "date": "2020-06-12T09:57:00.000Z",
       "time": "12:00",
       "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 511206,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 302649,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 556536,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 348999,
+      "category": "",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }

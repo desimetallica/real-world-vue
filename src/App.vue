@@ -129,6 +129,9 @@ small {
   background: linear-gradient(to right, #16c0b0, #84cf6a);
   color: #fff;
 }
+.error {
+  border: 1px solid red;
+}
 button,
 label,
 input,

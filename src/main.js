@@ -10,8 +10,11 @@ camelCase converts a string to camel case (camelCase isWritten likeThis)
 */
 import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
-
+import { Vuelidate } from "vuelidate";
 import "nprogress/nprogress.css";
+
+//Use vuelidate globally
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 

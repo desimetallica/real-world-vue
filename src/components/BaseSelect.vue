@@ -1,7 +1,13 @@
 <template>
   <div>
     <label v-if="label"> {{ label }}</label>
-    <select type="text" :value="value" @change="updateValue" v-bind="$attrs">
+    <select
+      :value="value"
+      @change="updateValue"
+      v-bind="$attrs"
+      v-on="$listeners"
+    >
+      <!-- We added $listeners element so it can inherit the blur event listener. -->
       <option
         v-for="option in options"
         :value="option"

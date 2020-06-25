@@ -2,7 +2,13 @@
   <div>
     <label v-if="label"> {{ label }}</label>
     <!-- listens for input event and triggers method -->
-    <input type="text" :value="value" @input="updateValue" v-bind="$attrs" />
+    <input
+      type="text"
+      :value="value"
+      @input="updateValue"
+      v-bind="$attrs"
+      v-on="listeners"
+    />
   </div>
 </template>
 
@@ -30,6 +36,18 @@ export default {
     such as the user’s email, and use that as the starting 
     value of the input field. Having a value prop like 
     this allows us to do that.*/
+  },
+  computed: {
+    /* This solve the conflict between @input="updateValue" and our
+    @blur for the validation. The conflict cause the getting of blur 
+    into input value. With this computed property, which we’ll call 
+    listeners and put the correct value */
+    listeners() {
+      return {
+        ...this.$listeners,
+        input: this.updateValue
+      };
+    }
   }
 };
 </script>
