@@ -233,6 +233,28 @@
       "date": "",
       "time": "",
       "attendees": []
+    },
+    {
+      "user": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "id": 576976,
+      "category": "animal welfare",
+      "organizer": {
+        "user": {
+          "id": "abc123",
+          "name": "Adam"
+        }
+      },
+      "title": "sdas",
+      "description": "sad",
+      "location": "asda",
+      "date": "2020-06-16T13:34:00.000Z",
+      "time": "18:00",
+      "attendees": []
     }
   ]
 }

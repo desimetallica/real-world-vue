@@ -21,24 +21,30 @@
 </template>
 
 <script>
+import { formFieldMixin } from "../mixins/formFieldMixin";
 export default {
-  inheritAttrs: false,
+  mixins: [formFieldMixin],
+  /* Instead use this options here we can move it inside formFieldMixin.js 
+  that is a like library for vue.js */
+  /* inheritAttrs: false, */
   props: {
-    label: {
+    /* label: {
       default: "",
       type: String
     },
-    value: [String, Number],
+    value: [String, Number], */
     options: {
       type: Array,
       required: true
     }
-  },
+  }
+  /* Also this updateValue can be moved into the mixing lib */
+  /*
   methods: {
     updateValue(event) {
       this.$emit("input", event.target.value);
     }
-  }
+  } */
 };
 </script>
 
