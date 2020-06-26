@@ -12,9 +12,12 @@ import upperFirst from "lodash/upperFirst";
 import camelCase from "lodash/camelCase";
 import { Vuelidate } from "vuelidate";
 import "nprogress/nprogress.css";
+import DateFilter from "./filters/date.js";
 
 //Use vuelidate globally
 Vue.use(Vuelidate);
+//Global filter usable into all components
+Vue.filter("date", DateFilter);
 
 Vue.config.productionTip = false;
 
